@@ -1,0 +1,68 @@
+name: OpenInVSCode
+options:
+  bundleIdPrefix: ch.latifcodess
+  deploymentTarget:
+    macOS: "13.0"
+settings:
+  base:
+    SWIFT_VERSION: "5.0"
+    CODE_SIGN_STYLE: Automatic
+    CODE_SIGN_IDENTITY: "Apple Development"
+    DEVELOPMENT_TEAM: 79W4JUNG7Y
+    ENABLE_HARDENED_RUNTIME: YES
+    MARKETING_VERSION: "1.0"
+    CURRENT_PROJECT_VERSION: "1"
+targets:
+  OpenInVSCode:
+    type: application
+    platform: macOS
+    sources: [App]
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: ch.latifcodess.OpenInVSCode
+        PRODUCT_NAME: Open in VS Code
+    info:
+      path: App/Info.plist
+      properties:
+        CFBundleDisplayName: Open in VS Code
+        LSApplicationCategoryType: public.app-category.developer-tools
+        NSHumanReadableCopyright: ""
+    entitlements:
+      path: App/OpenInVSCode.entitlements
+      properties:
+        com.apple.security.app-sandbox: true
+    dependencies:
+      - target: FinderExtension
+        embed: true
+  FinderExtension:
+    type: app-extension
+    platform: macOS
+    sources: [FinderExtension]
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: ch.latifcodess.OpenInVSCode.FinderExtension
+        PRODUCT_NAME: FinderExtension
+    info:
+      path: FinderExtension/Info.plist
+      properties:
+        CFBundleDisplayName: Open in VS Code
+        LSUIElement: true
+        NSExtension:
+          NSExtensionAttributes: {}
+          NSExtensionPointIdentifier: com.apple.FinderSync
+          NSExtensionPrincipalClass: $(PRODUCT_MODULE_NAME).FinderSync
+    entitlements:
+      path: FinderExtension/FinderExtension.entitlements
+      properties:
+        com.apple.security.app-sandbox: true
+        com.apple.security.files.user-selected.read-only: true
+schemes:
+  OpenInVSCode:
+    build:
+      targets:
+        OpenInVSCode: all
+        FinderExtension: all
+    run:
+      config: Debug
+    archive:
+      config: Release
