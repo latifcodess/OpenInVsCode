@@ -8,8 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		0BBCB1F922728B0335C9C8E3 /* FinderSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66FECCE8D08A4032ADC21440 /* FinderSync.swift */; };
+		16E7D54FF93A014E449A9587 /* ch.latifcodess.OpenInVSCode.LoginAgent.plist in CopyFiles */ = {isa = PBXBuildFile; fileRef = E86CDB6634347110374778F8 /* ch.latifcodess.OpenInVSCode.LoginAgent.plist */; };
+		46F3302772C9FEA968453FE3 /* LoginItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03D97B2BB041F9B8BEF0304 /* LoginItem.swift */; };
+		4CD8C77FB7DD6E42BC5B160A /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD85D5ACCB7BD18D891DA94 /* AppSettings.swift */; };
+		58A9FC19FA651DF02ED3D3FA /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E87F182DAAC5B8598EB1310F /* SettingsView.swift */; };
+		BA3E089A6F179F9E94EA3FAE /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = B13CD7A1380D244FDC461902 /* main.swift */; };
+		CB3ECABE166B7C0BECA271D6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4B0C90D9398C6CA342B97C71 /* Assets.xcassets */; };
+		D20A15B56496D0283B37AF8A /* UpdateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0571812C6B1C4B657C67F360 /* UpdateManager.swift */; };
+		D84BA42EF36F5F8CC9AEB4FC /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD85D5ACCB7BD18D891DA94 /* AppSettings.swift */; };
 		DC6DEC2C750905EEF5F6E85C /* FinderExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 8F2545EF9D06E36007665116 /* FinderExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		E3C11E3A61A2C7172AEBB0AA /* OpenInVSCodeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6E966A8772AE9BE5ECC1D0 /* OpenInVSCodeApp.swift */; };
+		E352B9FA5978CB8AD281700E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3CC22B6D2E04A78BA38486 /* AppDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,20 +42,46 @@
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		FCE48F80E4706372401078FC /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = Contents/Library/LaunchAgents;
+			dstSubfolderSpec = 1;
+			files = (
+				16E7D54FF93A014E449A9587 /* ch.latifcodess.OpenInVSCode.LoginAgent.plist in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0571812C6B1C4B657C67F360 /* UpdateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateManager.swift; sourceTree = "<group>"; };
+		4B0C90D9398C6CA342B97C71 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		66FECCE8D08A4032ADC21440 /* FinderSync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinderSync.swift; sourceTree = "<group>"; };
 		7ABCFC34F803B263185BF51B /* OpenInVSCode.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenInVSCode.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8148522F4B826E0B0FD82D3D /* OpenInVSCode.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OpenInVSCode.entitlements; sourceTree = "<group>"; };
 		8F2545EF9D06E36007665116 /* FinderExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = FinderExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		A03D97B2BB041F9B8BEF0304 /* LoginItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginItem.swift; sourceTree = "<group>"; };
 		A3B76B2914AF547D1D96459B /* FinderExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FinderExtension.entitlements; sourceTree = "<group>"; };
-		AE6E966A8772AE9BE5ECC1D0 /* OpenInVSCodeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenInVSCodeApp.swift; sourceTree = "<group>"; };
+		AA3CC22B6D2E04A78BA38486 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		B13CD7A1380D244FDC461902 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		B40FD52DF671B110846F30E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		D7DF074D81E83EFC454FEE53 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		DCD85D5ACCB7BD18D891DA94 /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
+		E86CDB6634347110374778F8 /* ch.latifcodess.OpenInVSCode.LoginAgent.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = ch.latifcodess.OpenInVSCode.LoginAgent.plist; sourceTree = "<group>"; };
+		E87F182DAAC5B8598EB1310F /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
+		3B61D193E557CC53649344DF /* LaunchAgents */ = {
+			isa = PBXGroup;
+			children = (
+				E86CDB6634347110374778F8 /* ch.latifcodess.OpenInVSCode.LoginAgent.plist */,
+			);
+			name = LaunchAgents;
+			path = App/LaunchAgents;
+			sourceTree = "<group>";
+		};
 		6E847615909FD13B61B1B168 /* FinderExtension */ = {
 			isa = PBXGroup;
 			children = (
@@ -72,16 +106,31 @@
 			children = (
 				E2CD1EF927B901494A73A159 /* App */,
 				6E847615909FD13B61B1B168 /* FinderExtension */,
+				3B61D193E557CC53649344DF /* LaunchAgents */,
+				B96C0E8EC0CF0686B5B7067C /* Shared */,
 				9AEADA54053FA6844B87C5E1 /* Products */,
 			);
+			sourceTree = "<group>";
+		};
+		B96C0E8EC0CF0686B5B7067C /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				DCD85D5ACCB7BD18D891DA94 /* AppSettings.swift */,
+			);
+			path = Shared;
 			sourceTree = "<group>";
 		};
 		E2CD1EF927B901494A73A159 /* App */ = {
 			isa = PBXGroup;
 			children = (
+				AA3CC22B6D2E04A78BA38486 /* AppDelegate.swift */,
+				4B0C90D9398C6CA342B97C71 /* Assets.xcassets */,
 				B40FD52DF671B110846F30E9 /* Info.plist */,
+				A03D97B2BB041F9B8BEF0304 /* LoginItem.swift */,
+				B13CD7A1380D244FDC461902 /* main.swift */,
 				8148522F4B826E0B0FD82D3D /* OpenInVSCode.entitlements */,
-				AE6E966A8772AE9BE5ECC1D0 /* OpenInVSCodeApp.swift */,
+				E87F182DAAC5B8598EB1310F /* SettingsView.swift */,
+				0571812C6B1C4B657C67F360 /* UpdateManager.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -94,6 +143,8 @@
 			buildConfigurationList = 9052CAB6E43F7663881BB663 /* Build configuration list for PBXNativeTarget "OpenInVSCode" */;
 			buildPhases = (
 				1C7BBCD38195FFDD5CAAA072 /* Sources */,
+				8197A1EF0820B9C696F6758B /* Resources */,
+				FCE48F80E4706372401078FC /* CopyFiles */,
 				9A740B650051551ABCE921B1 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
@@ -164,12 +215,28 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXResourcesBuildPhase section */
+		8197A1EF0820B9C696F6758B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CB3ECABE166B7C0BECA271D6 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		1C7BBCD38195FFDD5CAAA072 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E3C11E3A61A2C7172AEBB0AA /* OpenInVSCodeApp.swift in Sources */,
+				E352B9FA5978CB8AD281700E /* AppDelegate.swift in Sources */,
+				4CD8C77FB7DD6E42BC5B160A /* AppSettings.swift in Sources */,
+				46F3302772C9FEA968453FE3 /* LoginItem.swift in Sources */,
+				58A9FC19FA651DF02ED3D3FA /* SettingsView.swift in Sources */,
+				D20A15B56496D0283B37AF8A /* UpdateManager.swift in Sources */,
+				BA3E089A6F179F9E94EA3FAE /* main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -177,6 +244,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D84BA42EF36F5F8CC9AEB4FC /* AppSettings.swift in Sources */,
 				0BBCB1F922728B0335C9C8E3 /* FinderSync.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -245,7 +313,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 79W4JUNG7Y;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -260,7 +328,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -307,7 +375,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 79W4JUNG7Y;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -328,7 +396,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;

@@ -3,16 +3,20 @@ import FinderSync
 
 final class FinderSync: FIFinderSync {
 
-    /// Éditeurs supportés, par ordre de préférence : bundle ID + schéma d'URL associé.
-    private let editors: [(bundleID: String, scheme: String)] = [
-        ("com.microsoft.VSCode", "vscode"),
-        ("com.microsoft.VSCodeInsiders", "vscode-insiders"),
-    ]
-
     override init() {
         super.init()
+        AppSettings.registerDefaults()
         // Surveille tout le disque pour que le menu apparaisse partout
         FIFinderSyncController.default().directoryURLs = [URL(fileURLWithPath: "/")]
+    }
+
+    // MARK: - Bouton de barre d'outils (Présentation › Personnaliser la barre d'outils…)
+
+    override var toolbarItemName: String { "Ouvrir dans l'éditeur" }
+    override var toolbarItemToolTip: String { "Ouvrir le dossier courant ou la sélection dans l'éditeur" }
+    override var toolbarItemImage: NSImage {
+        NSImage(systemSymbolName: "chevron.left.forwardslash.chevron.right", accessibilityDescription: nil)
+            ?? NSImage(named: NSImage.folderName)!
     }
 
     // MARK: - Menu
@@ -20,7 +24,7 @@ final class FinderSync: FIFinderSync {
     override func menu(for menuKind: FIMenuKind) -> NSMenu? {
         let action: Selector
         switch menuKind {
-        case .contextualMenuForItems:
+        case .contextualMenuForItems, .toolbarItemMenu:
             action = #selector(openSelectedItems(_:))
         case .contextualMenuForContainer:
             action = #selector(openCurrentFolder(_:))
@@ -28,16 +32,19 @@ final class FinderSync: FIFinderSync {
             return nil
         }
 
+        let editor = AppSettings.editor.resolved
         let menu = NSMenu(title: "")
-        let item = NSMenuItem(title: "Ouvrir avec VS Code", action: action, keyEquivalent: "")
-        item.image = vscodeIcon()
+        let item = NSMenuItem(title: "Ouvrir avec \(editor.displayName)", action: action, keyEquivalent: "")
+        if AppSettings.showMenuIcon {
+            item.image = icon(for: editor)
+        }
         menu.addItem(item)
         return menu
     }
 
     // MARK: - Actions
 
-    /// Clic droit sur un ou plusieurs éléments.
+    /// Clic droit sur un ou plusieurs éléments (ou bouton de barre d'outils).
     @objc private func openSelectedItems(_ sender: AnyObject?) {
         let controller = FIFinderSyncController.default()
         var urls = controller.selectedItemURLs() ?? []
@@ -53,47 +60,36 @@ final class FinderSync: FIFinderSync {
         open([current])
     }
 
+    /// Passe par le schéma d'URL `<scheme>://file/<chemin>` plutôt que NSWorkspace.open(urls, withApplicationAt:) :
+    /// l'extension est sandboxée et n'a pas accès aux fichiers, donc l'ouverture directe déclenche
+    /// l'alerte « … n'est pas autorisé à ouvrir … ». Le schéma d'URL ne transmet qu'un chemin, sans accès requis.
     private func open(_ urls: [URL]) {
-        guard !urls.isEmpty else { return }
-
-        guard let editor = installedEditor() else {
-            openWithURLScheme(urls, scheme: editors[0].scheme)
-            return
-        }
-
-        let config = NSWorkspace.OpenConfiguration()
-        config.activates = true
-        NSWorkspace.shared.open(urls, withApplicationAt: editor.appURL, configuration: config) { [weak self] _, error in
-            guard let error else { return }
-            NSLog("OpenInVSCode: ouverture directe échouée (\(error)), repli sur le schéma d'URL")
-            DispatchQueue.main.async {
-                self?.openWithURLScheme(urls, scheme: editor.scheme)
+        var targets: [URL] = []
+        for url in urls {
+            let target = (AppSettings.fileOpensParent && !isDirectory(url)) ? url.deletingLastPathComponent() : url
+            if !targets.contains(where: { $0.standardizedFileURL.path == target.standardizedFileURL.path }) {
+                targets.append(target)
             }
         }
-    }
 
-    // Plan B : vscode://file/<chemin>
-    private func openWithURLScheme(_ urls: [URL], scheme: String) {
-        for url in urls {
+        let scheme = AppSettings.editor.resolved.urlScheme
+        let query = AppSettings.newWindow ? "?windowId=_blank" : ""
+        for url in targets {
             guard let path = url.path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed),
-                  let schemeURL = URL(string: "\(scheme)://file\(path)") else { continue }
+                  let schemeURL = URL(string: "\(scheme)://file\(path)\(query)") else { continue }
             NSWorkspace.shared.open(schemeURL)
         }
     }
 
     // MARK: - Helpers
 
-    private func installedEditor() -> (appURL: URL, scheme: String)? {
-        for editor in editors {
-            if let url = NSWorkspace.shared.urlForApplication(withBundleIdentifier: editor.bundleID) {
-                return (url, editor.scheme)
-            }
-        }
-        return nil
+    private func isDirectory(_ url: URL) -> Bool {
+        if url.hasDirectoryPath { return true }
+        return (try? url.resourceValues(forKeys: [.isDirectoryKey]).isDirectory) ?? false
     }
 
-    private func vscodeIcon() -> NSImage? {
-        guard let appURL = installedEditor()?.appURL else { return nil }
+    private func icon(for editor: Editor) -> NSImage? {
+        guard let appURL = editor.appURL else { return nil }
         let icon = NSWorkspace.shared.icon(forFile: appURL.path)
         icon.size = NSSize(width: 16, height: 16)
         return icon
